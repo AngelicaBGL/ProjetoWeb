@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - BP Rural</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <?php include 'backend/sessao.php'; ?>
+    <header>
+        <h1>Relatórios</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Voltar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Selecione o Relatório</h2>
+        <ul class="relatorios">
+            <li><a href="backend/relatorio.php?tipo=usuarios">Relatório de Usuários</a></li>
+            <li><a href="backend/relatorio.php?tipo=grupos">Relatório de Grupos</a></li>
+            <li><a href="backend/relatorio.php?tipo=produtos">Relatório de Produtos</a></li>
+        </ul>
+    </main>
+</body>
+</html>
