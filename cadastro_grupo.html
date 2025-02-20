@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Grupo - BP Rural</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <?php include 'backend/sessao.php'; ?>
+    <header>
+        <h1>Cadastrar Grupo</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Voltar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form action="backend/cadastro_grupo.php" method="POST">
+            <label for="nome">Nome do Grupo:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </main>
+</body>
+</html>
