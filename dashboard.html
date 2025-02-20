@@ -1,0 +1,94 @@
+<?php
+// Inicia a sessão e verifica se o usuário está autenticado
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    // Se não estiver autenticado, redireciona para a página de login
+    header("Location: login.html");
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BP Rural</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo, <?php echo $_SESSION['usuario_nome']; ?>!</h1>
+        <nav>
+            <ul>
+                <li><a href="cadastro_usuario.html">Cadastrar Usuário</a></li>
+                <li><a href="cadastro_grupo.html">Cadastrar Grupo</a></li>
+                <li><a href="cadastro_produto.html">Cadastrar Produto</a></li>
+                <li><a href="relatorios.html">Relatórios</a></li>
+                <li><a href="logout.php">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Painel de Controle</h2>
+        <p>Selecione uma das opções acima para gerenciar o sistema.</p>
+
+        <!-- Seção de Resumo -->
+        <section class="resumo">
+            <h3>Resumo do Sistema</h3>
+            <div class="cards">
+                <div class="card">
+                    <h4>Total de Usuários</h4>
+                    <p><?php
+                        // Conecta ao banco de dados e conta o número de usuários
+                        $conn = new mysqli("localhost", "root", "", "bprural");
+                        if ($conn->connect_error) {
+                            die("Erro na conexão: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT COUNT(*) as total FROM usuarios";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        echo $row['total'];
+                        $conn->close();
+                    ?></p>
+                </div>
+                <div class="card">
+                    <h4>Total de Grupos</h4>
+                    <p><?php
+                        // Conecta ao banco de dados e conta o número de grupos
+                        $conn = new mysqli("localhost", "root", "", "bprural");
+                        if ($conn->connect_error) {
+                            die("Erro na conexão: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT COUNT(*) as total FROM grupos";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        echo $row['total'];
+                        $conn->close();
+                    ?></p>
+                </div>
+                <div class="card">
+                    <h4>Total de Produtos</h4>
+                    <p><?php
+                        // Conecta ao banco de dados e conta o número de produtos
+                        $conn = new mysqli("localhost", "root", "", "bprural");
+                        if ($conn->connect_error) {
+                            die("Erro na conexão: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT COUNT(*) as total FROM produtos";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        echo $row['total'];
+                        $conn->close();
+                    ?></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 BP Rural Produtos Agropecuários. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
