@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto - BP Rural</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <?php include 'backend/sessao.php'; ?>
+    <header>
+        <h1>Cadastrar Produto</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Voltar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form action="backend/cadastro_produto.php" method="POST">
+            <label for="nome">Nome do Produto:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" rows="4" required></textarea>
+
+            <label for="preco">Preço:</label>
+            <input type="number" id="preco" name="preco" step="0.01" required>
+
+            <label for="grupo_id">Grupo (Categoria):</label>
+            <select id="grupo_id" name="grupo_id" required>
+                <?php
+                // Conecta ao banco de dados e busca os grupos cadastrados
+                $conn = new mysqli("localhost", "root", "", "bprural");
+                if ($conn->connect_error) {
+                    die("Erro na conexão: " . $conn->connect_error);
+                }
+                $sql = "SELECT id, nome FROM grupos";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                    }
+                } else {
+                    echo "<option value=''>Nenhum grupo cadastrado</option>";
+                }
+                $conn->close();
+                ?>
+            </select>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </main>
+</body>
+</html>
