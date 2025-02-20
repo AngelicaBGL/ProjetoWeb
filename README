@@ -7,13 +7,13 @@ Este documento descreve a estrutura das tabelas que devem ser cadastradas no ban
 ### 1. Tabela `usuarios`
 Armazena informações dos usuários do sistema.
 
-| Campo   | Tipo            | Restrições                               |
-|---------|----------------|------------------------------------------|
-| id      | INT            | AUTO_INCREMENT, PRIMARY KEY             |
-| nome    | VARCHAR(100)   | NOT NULL                                 |
-| email   | VARCHAR(100)   | NOT NULL, UNIQUE                        |
-| senha   | VARCHAR(255)   | NOT NULL                                 |
-| perfil  | ENUM           | ('admin', 'editor') DEFAULT 'editor'     |
+| Campo   | Tipo           | Restrições                                |
+|---------|----------------|-------------------------------------------|
+| id      | INT            | AUTO_INCREMENT, PRIMARY KEY               |
+| nome    | VARCHAR(100)   | NOT NULL                                  |
+| email   | VARCHAR(100)   | NOT NULL, UNIQUE                          |
+| senha   | VARCHAR(255)   | NOT NULL                                  |
+| perfil  | ENUM           | ('admin', 'editor') DEFAULT 'editor'      |
 
 #### SQL para criação:
 ```sql
@@ -32,9 +32,9 @@ CREATE TABLE usuarios (
 Armazena categorias ou grupos de produtos.
 
 | Campo   | Tipo          | Restrições                   |
-|---------|--------------|------------------------------|
-| id      | INT          | AUTO_INCREMENT, PRIMARY KEY |
-| nome    | VARCHAR(100) | NOT NULL                     |
+|---------|---------------|------------------------------|
+| id      | INT           | AUTO_INCREMENT, PRIMARY KEY  |
+| nome    | VARCHAR(100)  | NOT NULL                     |
 
 #### SQL para criação:
 ```sql
@@ -49,13 +49,13 @@ CREATE TABLE grupos (
 ### 3. Tabela `produtos`
 Armazena informações dos produtos.
 
-| Campo     | Tipo          | Restrições                          |
+| Campo     | Tipo         | Restrições                          |
 |-----------|--------------|-------------------------------------|
-| id        | INT          | AUTO_INCREMENT, PRIMARY KEY        |
+| id        | INT          | AUTO_INCREMENT, PRIMARY KEY         |
 | nome      | VARCHAR(100) | NOT NULL                            |
 | descricao | TEXT         |                                     |
 | preco     | DECIMAL(10,2)| NOT NULL                            |
-| grupo_id  | INT          | FOREIGN KEY REFERENCES grupos(id)  |
+| grupo_id  | INT          | FOREIGN KEY REFERENCES grupos(id)   |
 
 #### SQL para criação:
 ```sql
